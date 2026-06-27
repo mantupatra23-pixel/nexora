@@ -1,0 +1,33 @@
+services:
+  # 1. FastAPI Web Backend Service
+  - type: web
+    name: nexora-backend
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free # Aap ise saste ya free tier par rakh sakte hain
+    region: singapore # India ke paas ke liye Singapore region best hai
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true # Render automatic ek secure key generate karega
+      - key: POSTGRES_SERVER
+        fromDatabase:
+          name: nexora-db
+          property: host
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: nexora-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: nexora-db
+          property: password
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: nexora-db
+          property: database
+
+databases:
+  # 2. Managed PostgreSQL Database
+  - name: nexora-db
+    plan: free
+    region: singapore
