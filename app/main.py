@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.v1.workflow_router import router as workflow_router
+from app.api.v1.agent_router import router as agent_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -9,7 +10,6 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
-# Cross-Origin Resource Sharing rules
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(workflow_router, prefix=settings.API_V1_STR)
+app.include_router(agent_router, prefix=settings.API_V1_STR)
 
 @app.get("/health", tags=["Health"])
 async def health_check():
