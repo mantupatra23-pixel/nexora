@@ -1,0 +1,28 @@
+cat <<EOT > .gitignore
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node / Frontend cache
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Environment configurations
+.env
+.env.local
+
+# System files
+.DS_Store
+Thumbs.db
+EOT
